@@ -1,0 +1,12 @@
+▶️ How to Run in Ubuntu
+Terminal 1: Start the server
+python3 udp_server.py
+
+Terminal 2: Run the client
+python3 udp_client.py
+
+Enter a filename
+
+Example:
+
+sample.txt

@@ -1,24 +1,23 @@
-# tcp_client.py
+# udp_client.py
 
 import socket
 
-# Step 1: Create TCP socket
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Step 1: Create UDP socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Step 2: Connect to server
-client_socket.connect(('localhost', 8080))
+server_address = ('localhost', 8081)
 
-# Step 3: Send filename
 filename = input("Enter filename to request: ")
 
-client_socket.send(filename.encode())
+# Step 2: Send filename to server
+client_socket.sendto(filename.encode(), server_address)
 
-# Step 4: Receive file contents
-data = client_socket.recv(4096).decode()
+# Step 3: Receive response
+data, addr = client_socket.recvfrom(4096)
 
 print("\n--- File Content ---\n")
-print(data)
+print(data.decode())
 
-# Step 5: Close connection
+# Step 4: Close socket
 client_socket.close()
 
